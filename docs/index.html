@@ -25,6 +25,7 @@
         }
         
         body {
+            margin: 0; /* Ensure no default body margin */
             background-color: var(--black);
             color: var(--white);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -105,23 +106,26 @@
             transform: translateY(-2px);
         }
         
+        /* Styles for the navigation bar */
         .nav {
-            display: flex;
-            justify-content: center;
+            display: flex; /* Enable Flexbox */
+            justify-content: center; /* Center flex items horizontally within the nav */
             background-color: var(--medium-gray);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 2rem 0;
+            padding: 1rem 0; /* Adjust padding as needed, 0 horizontal padding now */
+            border-radius: 8px; /* Keep rounded corners if desired */
+            margin: 2rem auto; /* Center the nav itself and keep vertical margin */
             position: sticky;
             top: 0;
             z-index: 100;
+            /* Remove width: 100%; to let .container control width */
         }
         
         .nav a {
             color: var(--text-gray);
-            margin: 0 1rem;
+            margin: 0 1rem; /* Keep horizontal margin between links */
             text-decoration: none;
             transition: all 0.3s ease;
+            padding: 0.5rem 1rem; /* Add some padding to the links for better click area */
         }
         
         .nav a:hover {
@@ -1004,7 +1008,8 @@
                             font: {
                                 size: 16
                             }
-                        },
+                        }
+                    },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
@@ -1087,7 +1092,8 @@
                             font: {
                                 size: 16
                             }
-                        },
+                        }
+                    },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
@@ -1161,7 +1167,7 @@
                 const targetSection = document.querySelector(this.getAttribute('href'));
                 
                 window.scrollTo({
-                    top: targetSection.offsetTop - 80,
+                    top: targetSection.offsetTop - 80, // Adjust offset if needed
                     behavior: 'smooth'
                 });
             });
