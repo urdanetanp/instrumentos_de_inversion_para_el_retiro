@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumentos de Inversión para el Retiro en EE. UU.</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #121212;
+            --medium-gray: #232323;
+            --light-gray: #3a3a3a;
+            --text-gray: #b0b0b0;
+            --white: #ffffff;
+            --blue-100: #e6f0ff;
+            --blue-300: #4dabf7;
+            --blue-500: #1c7ed6;
+            --blue-700: #1864ab;
+            --orange-300: #ffa94d;
+            --orange-500: #ff8c00;
+            --orange-700: #d9480f;
+        }
+        
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background-color: var(--dark-gray);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: var(--orange-300);
+            border-bottom: 2px solid var(--blue-500);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card {
+            background-color: var(--medium-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--blue-500);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border-left-color: var(--orange-500);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--orange-300);
+            margin-bottom: 0.75rem;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--blue-500);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: var(--blue-700);
+            transform: translateY(-2px);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--medium-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav a {
+            color: var(--text-gray);
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: var(--orange-300);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        th {
+            background-color: var(--medium-gray);
+            color: var(--orange-300);
+        }
+        
+        tr:hover {
+            background-color: var(--medium-gray);
+        }
+        
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: var(--dark-gray);
+            z-index: 10;
+        }
+        
+        .advantage {
+            color: #4caf50;
+        }
+        
+        .disadvantage {
+            color: #f44336;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background-color: var(--medium-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--blue-500);
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .highlight {
+            color: var(--orange-500);
+            font-weight: 600;
+        }
+        
+        .disclaimer {
+            background-color: rgba(255, 140, 0, 0.1);
+            border-left: 4px solid var(--orange-500);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .accordion {
+            background-color: var(--medium-gray);
+            cursor: pointer;
+            padding: 1rem;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            color: var(--white);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: var(--orange-300);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 1rem;
+            background-color: var(--dark-gray);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        
+        .panel-content {
+            padding: 1rem;
+        }
+        
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tab {
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .tab button {
+            background-color: var(--medium-gray);
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            transition: 0.3s;
+            color: var(--text-gray);
+            font-weight: 500;
+            flex: 1;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab button:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .tab button.active {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            border-bottom: 3px solid var(--orange-500);
+        }
+        
+        .tabcontent {
+            display: none;
+            padding: 1.5rem;
+            border-top: none;
+            animation: fadeEffect 1s;
+            background-color: var(--dark-gray);
+            border-radius: 0 0 8px 8px;
+        }
+        
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 1px dotted var(--blue-300);
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--medium-gray);
+            color: var(--white);
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--blue-500);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(20px);
+        }
+        
+        .scroll-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Callout boxes for important information */
+        .callout {
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            position: relative;
+            border-left: 4px solid;
+        }
+        
+        .callout-info {
+            background-color: rgba(28, 126, 214, 0.1);
+            border-color: var(--blue-500);
+        }
+        
+        .callout-warning {
+            background-color: rgba(255, 140, 0, 0.1);
+            border-color: var(--orange-500);
+        }
+        
+        /* Color coding for visual elements */
+        .ira-tradicional-color {
+            color: var(--blue-300);
+        }
+        
+        .roth-ira-color {
+            color: var(--orange-300);
+        }
+        
+        .k401-color {
+            color: var(--blue-500);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="text-4xl font-bold text-center">Instrumentos de Inversión para el Retiro en EE. UU.</h1>
+            <p class="text-center text-gray-300 mt-4">Comparación detallada de IRA Tradicional, Roth IRA y 401k</p>
+        </div>
+    </header>
+
+    <nav class="nav container">
+        <a href="#introduccion">Introducción</a>
+        <a href="#comparacion">Comparación</a>
+        <a href="#visual">Visualización</a>
+        <a href="#ejemplo">Ejemplo Numérico</a>
+        <a href="#conclusion">Conclusión</a>
+    </nav>
+
+    <div class="container">
+        <section id="introduccion" class="section">
+            <h2 class="section-title text-2xl">Introducción</h2>
+            <p>Los planes de retiro en Estados Unidos ofrecen importantes ventajas fiscales para ayudar a las personas a ahorrar para su jubilación. Los más comunes son la IRA Tradicional, la Roth IRA y el 401k. Aunque todos tienen el objetivo de fomentar el ahorro a largo plazo, difieren significativamente en su funcionamiento y tratamiento fiscal.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-piggy-bank"></i>
+                    <h3 class="ira-tradicional-color">IRA Tradicional</h3>
+                    <p>Cuenta individual con contribuciones generalmente deducibles de impuestos</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-hand-holding-usd"></i>
+                    <h3 class="roth-ira-color">Roth IRA</h3>
+                    <p>Cuenta individual con retiros libres de impuestos en la jubilación</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-building"></i>
+                    <h3 class="k401-color">401k</h3>
+                    <p>Plan patrocinado por el empleador con posibles contribuciones equivalentes</p>
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <h4 class="font-bold mb-2"><i class="fas fa-info-circle mr-2"></i> Importancia de la Planificación del Retiro</h4>
+                <p>Planificar el retiro es esencial para asegurar la estabilidad financiera en el futuro. Comprender las diferencias entre estos instrumentos le permitirá tomar decisiones informadas según su situación particular.</p>
+            </div>
+        </section>
+
+        <section id="comparacion" class="section">
+            <h2 class="section-title text-2xl">Comparación Detallada</h2>
+            
+            <div class="tab-container">
+                <div class="tab">
+                    <button class="tablinks active" onclick="openTab(event, 'ira-tradicional')">IRA Tradicional</button>
+                    <button class="tablinks" onclick="openTab(event, 'roth-ira')">Roth IRA</button>
+                    <button class="tablinks" onclick="openTab(event, 'k401')">401k</button>
+                </div>
+
+                <div id="ira-tradicional" class="tabcontent" style="display: block;">
+                    <h3 class="card-title ira-tradicional-color"><i class="fas fa-piggy-bank mr-2"></i> IRA Tradicional</h3>
+                    <p><strong>Descripción y Funcionamiento:</strong> Una IRA Tradicional es una cuenta de ahorro para la jubilación individual (no vinculada a un empleador). Permite realizar contribuciones que, en muchos casos, son deducibles de impuestos en el año en que se realizan. Los fondos dentro de la cuenta crecen con impuestos diferidos, lo que significa que no se pagan impuestos sobre las ganancias anuales ni sobre los dividendos/intereses hasta que se retiran los fondos en la jubilación.</p>
+
+                    <h4 class="text-xl text-blue-300 mt-4">Ventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Deducción Fiscal Inmediata:</strong> Las contribuciones pueden ser deducibles de impuestos, lo que reduce tu ingreso imponible en el presente.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Crecimiento con Impuestos Diferidos:</strong> No pagas impuestos sobre las ganancias ni los ingresos de la inversión anualmente, lo que permite que tu dinero crezca más rápido con el tiempo.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Amplia Gama de Opciones de Inversión:</strong> Generalmente tienes un control total sobre cómo inviertes tu dinero dentro de la cuenta (acciones, bonos, fondos mutuos, ETFs, etc.).</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Accesible:</strong> Puedes abrir una IRA Tradicional por tu cuenta, independientemente de si tu empleador ofrece un plan de retiro.</li>
+                    </ul>
+
+                    <h4 class="text-xl text-blue-300 mt-4">Desventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Impuestos en la Jubilación:</strong> Los retiros calificados en la jubilación (después de los 59 años y medio) se gravan como ingreso ordinario.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Límites de Contribución:</strong> Existen límites máximos anuales sobre cuánto puedes contribuir.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Penalidades por Retiro Anticipado:</strong> Los retiros realizados antes de los 59 años y medio suelen estar sujetos a una penalidad del 10% (además de los impuestos sobre la renta), con algunas excepciones limitadas.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Obligación de Retiros Mínimos (RMDs):</strong> Debes comenzar a tomar distribuciones mínimas obligatorias (RMDs) una vez que alcanzas cierta edad (actualmente 73, cambiando a 75 en el futuro bajo la ley SECURE 2.0).</li>
+                    </ul>
+
+                    <h4 class="text-xl text-blue-300 mt-4">Tratamiento Fiscal</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><strong>Contribuciones:</strong> A menudo deducibles de impuestos en el año de la contribución (la deducibilidad total puede verse afectada por el ingreso y la participación en un plan de retiro patrocinado por el empleador).</li>
+                        <li><strong>Crecimiento de la Inversión:</strong> Crecimiento con impuestos diferidos (no se pagan impuestos anuales sobre las ganancias).</li>
+                        <li><strong>Retiros en la Jubilación:</strong> Gravados como ingreso ordinario.</li>
+                    </ul>
+                </div>
+
+                <div id="roth-ira" class="tabcontent">
+                    <h3 class="card-title roth-ira-color"><i class="fas fa-hand-holding-usd mr-2"></i> Roth IRA</h3>
+                    <p><strong>Descripción y Funcionamiento:</strong> Una Roth IRA es también una cuenta de ahorro para la jubilación individual. La característica distintiva es que las contribuciones se realizan después de impuestos (no son deducibles). Sin embargo, el crecimiento de la inversión es libre de impuestos, y los retiros calificados en la jubilación (después de los 59 años y medio y después de haber tenido la cuenta por al menos 5 años) son completamente libres de impuestos.</p>
+
+                    <h4 class="text-xl text-orange-300 mt-4">Ventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Retiros Libres de Impuestos en la Jubilación:</strong> La mayor ventaja es que no pagas impuestos sobre tus ganancias ni sobre tus contribuciones al retirar los fondos calificados en la jubilación.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Crecimiento Libre de Impuestos:</strong> Similar a la IRA Tradicional en el crecimiento con impuestos diferidos, pero con la ventaja adicional de que nunca se gravarán las ganancias si los retiros son calificados.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Flexibilidad de Contribuciones:</strong> Puedes retirar tus contribuciones (pero no las ganancias) en cualquier momento y por cualquier motivo, libre de impuestos y penalidades.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>No hay RMDs para el propietario original:</strong> El propietario original de una Roth IRA no está obligado a tomar distribuciones mínimas obligatorias durante su vida.</li>
+                    </ul>
+
+                    <h4 class="text-xl text-orange-300 mt-4">Desventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Sin Deducción Fiscal Inmediata:</strong> No obtienes un beneficio fiscal en el presente por tus contribuciones.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Límites de Ingreso para Contribuir:</strong> Existen límites de ingreso bruto ajustado modificado (MAGI) para poder contribuir directamente a una Roth IRA. Si tus ingresos superan el límite, no puedes contribuir o solo puedes contribuir parcialmente.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Límites de Contribución:</strong> Existen límites máximos anuales sobre cuánto puedes contribuir (los mismos que para la IRA Tradicional, combinados si contribuyes a ambos).</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Penalidades por Retiro Anticipado de Ganancias:</strong> Los retiros de ganancias antes de los 59 años y medio o si la cuenta no tiene 5 años pueden estar sujetos a impuestos y una penalidad del 10% (con algunas excepciones).</li>
+                    </ul>
+
+                    <h4 class="text-xl text-orange-300 mt-4">Tratamiento Fiscal</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><strong>Contribuciones:</strong> No deducibles de impuestos (después de impuestos).</li>
+                        <li><strong>Crecimiento de la Inversión:</strong> Libre de impuestos.</li>
+                        <li><strong>Retiros en la Jubilación:</strong> Calificados retiros son libres de impuestos.</li>
+                    </ul>
+                </div>
+
+                <div id="k401" class="tabcontent">
+                    <h3 class="card-title k401-color"><i class="fas fa-building mr-2"></i> 401k</h3>
+                    <p><strong>Descripción y Funcionamiento:</strong> Un 401k es un plan de ahorro para la jubilación patrocinado por el empleador. Los empleados pueden optar por diferir una parte de su salario antes de impuestos (en un 401k Tradicional) o después de impuestos (en un 401k Roth, si el empleador lo ofrece) a la cuenta. Muchos empleadores ofrecen una contribución de equiparación ("employer match") a las contribuciones del empleado. Los fondos crecen con impuestos diferidos (o libres de impuestos en la porción Roth) hasta el retiro.</p>
+
+                    <h4 class="text-xl text-blue-500 mt-4">Ventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Límites de Contribución Elevados:</strong> Generalmente, los límites de contribución anual son significativamente más altos que los de las IRAs.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Equiparación del Empleador (Employer Match):</strong> Muchos empleadores igualarán una parte de tus contribuciones, lo que representa dinero "gratis" y aumenta significativamente el potencial de ahorro.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Contribuciones Antes de Impuestos (en 401k Tradicional):</strong> Reduce tu ingreso imponible actual, similar a la IRA Tradicional deducible.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Roth 401k Opción:</strong> Si tu empleador la ofrece, puedes elegir hacer contribuciones después de impuestos para tener retiros libres de impuestos en la jubilación, como una Roth IRA.</li>
+                        <li><span class="advantage"><i class="fas fa-check-circle"></i></span> <strong>Posibilidad de Préstamo:</strong> Algunos planes 401k permiten a los participantes tomar préstamos de sus propios fondos (aunque esto generalmente no es recomendable).</li>
+                    </ul>
+
+                    <h4 class="text-xl text-blue-500 mt-4">Desventajas</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Dependiente del Empleador:</strong> Solo puedes contribuir a un 401k si tu empleador lo ofrece.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Opciones de Inversión Limitadas:</strong> Tu empleador selecciona las opciones de inversión disponibles en el plan, que pueden ser menos diversas que en una IRA individual.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Complejidad y Tarifas:</strong> Algunos planes 401k pueden tener tarifas de administración más altas o estructuras de tarifas más complejas que las IRAs.</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>Penalidades por Retiro Anticipado:</strong> Los retiros antes de los 59 años y medio suelen estar sujetos a una penalidad del 10% (además de los impuestos), con algunas excepciones limitadas (como dejar el empleo después de los 55 años).</li>
+                        <li><span class="disadvantage"><i class="fas fa-times-circle"></i></span> <strong>RMDs Aplican:</strong> Los 401k Tradicionales están sujetos a RMDs (los Roth 401k ahora también lo están bajo SECURE 2.0, aunque pueden transferirse a una Roth IRA para evitarlos).</li>
+                    </ul>
+
+                    <h4 class="text-xl text-blue-500 mt-4">Tratamiento Fiscal</h4>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><strong>401k Tradicional:</strong>
+                            <ul class="list-disc pl-6 mt-1">
+                                <li>Contribuciones: Pre-impuestos (deducibles del ingreso imponible actual).</li>
+                                <li>Crecimiento de la Inversión: Crecimiento con impuestos diferidos.</li>
+                                <li>Retiros en la Jubilación: Gravados como ingreso ordinario.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Roth 401k:</strong>
+                            <ul class="list-disc pl-6 mt-1">
+                                <li>Contribuciones: Después de impuestos (no deducibles).</li>
+                                <li>Crecimiento de la Inversión: Libre de impuestos.</li>
+                                <li>Retiros en la Jubilación: Calificados retiros son libres de impuestos.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <p class="mt-4"><strong>Nota:</strong> Las contribuciones de equiparación del empleador a un Roth 401k siempre se consideran pre-impuestos y se tratan fiscalmente como un 401k Tradicional al retirarlas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="visual" class="section">
+            <h2 class="section-title text-2xl">Comparación Visual de Características Clave</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th class="ira-tradicional-color">IRA Tradicional</th>
+                            <th class="roth-ira-color">Roth IRA</th>
+                            <th class="k401-color">401k</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Contribuciones</strong></td>
+                            <td>Pre-impuestos (deducibles)*</td>
+                            <td>Después de impuestos (no deducibles)</td>
+                            <td>Pre-impuestos (Tradicional) o después de impuestos (Roth)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Límite de Contribución 2023</strong></td>
+                            <td>$6,500 ($7,500 si ≥ 50 años)</td>
+                            <td>$6,500 ($7,500 si ≥ 50 años)</td>
+                            <td>$22,500 ($30,000 si ≥ 50 años)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crecimiento</strong></td>
+                            <td>Con impuestos diferidos</td>
+                            <td>Libre de impuestos</td>
+                            <td>Con impuestos diferidos (Tradicional) o libre de impuestos (Roth)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Retiros en Jubilación</strong></td>
+                            <td>Gravados como ingreso ordinario</td>
+                            <td>Libres de impuestos (calificados)</td>
+                            <td>Gravados como ingreso ordinario (Tradicional) o libres de impuestos (Roth)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Retiros Mínimos (RMDs)</strong></td>
+                            <td>Requeridos a partir de los 73 años</td>
+                            <td>No requeridos para propietario original</td>
+                            <td>Requeridos a partir de los 73 años</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penalidad Retiro Anticipado</strong></td>
+                            <td>10% antes de 59½ años (más impuestos)</td>
+                            <td>10% en ganancias antes de 59½ años (más impuestos)</td>
+                            <td>10% antes de 59½ años (más impuestos)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Límites de Ingreso</strong></td>
+                            <td>Sin límite para contribuir, límites para deducibilidad</td>
+                            <td>Límites de ingreso para contribuir directamente</td>
+                            <td>Sin límite de ingreso</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Participación Empleador</strong></td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Posible equiparación por el empleador</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexibilidad Inversión</strong></td>
+                            <td>Alta (muchas opciones disponibles)</td>
+                            <td>Alta (muchas opciones disponibles)</td>
+                            <td>Limitada (opciones seleccionadas por el empleador)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="text-sm mt-2">* La deducibilidad puede estar limitada dependiendo del ingreso y participación en planes de retiro patrocinados por el empleador.</p>
+            
+            <div class="chart-container">
+                <canvas id="taxBenefitsChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="growthComparison"></canvas>
+            </div>
+            
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4">Comparación de Escenarios Fiscales</h3>
+                
+                <div class="comparison-grid">
+                    <div class="card">
+                        <h4 class="ira-tradicional-color">Escenario IRA Tradicional</h4>
+                        <p>Ventajoso cuando:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Se espera estar en un tramo fiscal <strong>más bajo</strong> durante la jubilación</li>
+                            <li>Se necesita reducir la carga fiscal <strong>ahora</strong></li>
+                            <li>Se califica para deducción completa</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4 class="roth-ira-color">Escenario Roth IRA</h4>
+                        <p>Ventajoso cuando:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Se espera estar en un tramo fiscal <strong>más alto</strong> durante la jubilación</li>
+                            <li>Se prefiere retiros libres de impuestos en el futuro</li>
+                            <li>Se quiere flexibilidad en las contribuciones</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4 class="k401-color">Escenario 401k</h4>
+                        <p>Ventajoso cuando:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>El empleador ofrece <strong>equiparación de contribuciones</strong></li>
+                            <li>Se quiere ahorrar <strong>cantidades mayores</strong> que el límite de IRA</li>
+                            <li>Se prefiere la simplicidad de contribuciones automáticas desde el salario</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ejemplo" class="section">
+            <h2 class="section-title text-2xl">Ejemplo Numérico Comparativo</h2>
+            
+            <div class="callout callout-info mb-6">
+                <h4 class="font-bold mb-2">Suposiciones del Escenario</h4>
+                <ul class="list-disc pl-6">
+                    <li>Inversión inicial: $0</li>
+                    <li>Contribución anual: $6,000 (límite de IRA para 2023/2024, menores de 50)</li>
+                    <li>Horizonte de inversión: 30 años</li>
+                    <li>Instrumento: ETF que emula el S&P 500</li>
+                    <li>Rendimiento anual bruto estimado: 8%</li>
+                    <li>Tarifas anuales estimadas: 0.2%</li>
+                    <li>Rendimiento anual neto estimado: 7.8%</li>
+                    <li>Tasa impositiva en jubilación: 20%</li>
+                </ul>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-4">Cálculo del Valor Final</h3>
+            
+            <div class="card">
+                <p><strong>Fórmula utilizada:</strong> Valor Futuro de una Anualidad</p>
+                <p class="my-2">FV = P × [(1+r)<sup>n</sup> - 1] / r</p>
+                <p>Donde:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>P = $6,000 (contribución anual)</li>
+                    <li>r = 0.078 (tasa de crecimiento anual neta)</li>
+                    <li>n = 30 (años)</li>
+                </ul>
+                <p class="mt-3">Valor Final Estimado Antes de Impuestos: <strong class="highlight">$694,917</strong></p>
+            </div>
+            
+            <h3 class="text-xl font-bold mt-6 mb-4">Resultados Comparativos</h3>
+            
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Instrumento</th>
+                            <th>Valor Final Antes de Impuestos</th>
+                            <th>Impuestos en Jubilación</th>
+                            <th>Valor Neto en Jubilación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="ira-tradicional-color">IRA Tradicional</span></td>
+                            <td>$694,917</td>
+                            <td>$138,983 (20%)</td>
+                            <td>$555,934</td>
+                        </tr>
+                        <tr>
+                            <td><span class="roth-ira-color">Roth IRA</span></td>
+                            <td>$694,917</td>
+                            <td>$0 (0%)</td>
+                            <td>$694,917</td>
+                        </tr>
+                        <tr>
+                            <td><span class="k401-color">401k Tradicional</span></td>
+                            <td>$694,917</td>
+                            <td>$138,983 (20%)</td>
+                            <td>$555,934</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="chart-container mt-8">
+                <canvas id="netValueChart"></canvas>
+            </div>
+        </section>
+
+        <section id="conclusion" class="section">
+            <h2 class="section-title text-2xl">Conclusión</h2>
+            
+            <p>Bajo las suposiciones de este escenario (misma tasa de crecimiento, mismas tarifas, misma cantidad de contribución anual y una tasa impositiva en la jubilación del 20% que es menor que la tasa impositiva que se habría pagado sobre las contribuciones si no fueran deducibles/diferidas), la <span class="roth-ira-color">Roth IRA</span> resulta en un valor neto significativamente mayor en la jubilación porque el crecimiento y los retiros son libres de impuestos. La <span class="ira-tradicional-color">IRA Tradicional</span> y el <span class="k401-color">401k Tradicional</span>, al tener los retiros gravados, terminan con un valor neto menor después de impuestos.</p>
+            
+            <div class="callout callout-warning mt-6">
+                <h4 class="font-bold mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> Consideraciones Importantes</h4>
+                <p>Este ejemplo es una simplificación. La elección entre estos planes depende en gran medida de:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Tu situación fiscal actual frente a tu situación fiscal esperada en la jubilación</li>
+                    <li>Tus ingresos y la disponibilidad de un plan 401k con equiparación del empleador</li>
+                    <li>Tus preferencias personales sobre cuándo recibir el beneficio fiscal (ahora vs. en la jubilación)</li>
+                </ul>
+                <p class="mt-3">Si esperas estar en una categoría impositiva más alta en la jubilación, una Roth IRA o Roth 401k podría ser más ventajosa. Si esperas estar en una categoría impositiva más baja, una IRA Tradicional o 401k Tradicional podría ser preferible. Además, los límites de contribución y la equiparación del empleador en un 401k pueden hacer que sea una opción muy atractiva, a menudo utilizada en combinación con una IRA.</p>
+            </div>
+            
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4">Estrategias de Implementación</h3>
+                
+                <div class="accordion">Estrategia de Diversificación Fiscal</div>
+                <div class="panel">
+                    <div class="panel-content">
+                        <p>Una estrategia prudente es diversificar entre instrumentos con tratamiento fiscal diferente:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Contribuir a un 401k hasta el máximo de la equiparación del empleador</li>
+                            <li>Utilizar una Roth IRA para beneficios fiscales futuros</li>
+                            <li>Si aún hay capacidad de ahorro, maximizar el 401k</li>
+                        </ul>
+                        <p class="mt-3">Esta estrategia proporciona flexibilidad fiscal durante la jubilación, permitiendo gestionar tus retiros para minimizar el impacto fiscal total.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion">Estrategia basada en Etapas de Carrera</div>
+                <div class="panel">
+                    <div class="panel-content">
+                        <p>Adapta tu estrategia según la etapa de tu carrera profesional:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li><strong>Inicio de carrera (ingresos bajos):</strong> Enfoque en Roth IRA/Roth 401k cuando las tasas impositivas son probablemente más bajas</li>
+                            <li><strong>Mitad de carrera (ingresos altos):</strong> Enfoque en opciones tradicionales pre-impuestos para reducir la carga fiscal actual</li>
+                            <li><strong>Final de carrera:</strong> Reevaluación basada en proyecciones de ingresos en jubilación</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion">Estrategia de Conversión Roth</div>
+                <div class="panel">
+                    <div class="panel-content">
+                        <p>La "conversión Roth" implica trasladar fondos de cuentas tradicionales a cuentas Roth:</p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Pagas impuestos sobre el monto convertido en el año de la conversión</li>
+                            <li>El crecimiento futuro y los retiros serán libres de impuestos</li>
+                            <li>Ideal durante años de ingresos excepcionalmente bajos o durante bajadas del mercado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-gray-900 text-center py-6 mt-12">
+        <div class="container">
+            <p class="text-gray-400">© 2023 Instrumentos de Inversión para el Retiro en EE. UU.</p>
+            <p class="text-sm text-gray-500 mt-2">Esta información es de carácter educativo y no constituye asesoramiento financiero o fiscal. Consulte con un profesional financiero calificado antes de tomar decisiones de inversión.</p>
+        </div>
+    </footer>
+
+    <div id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Inicializar gráficos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gráfico de Beneficios Fiscales
+            const taxBenefitsCtx = document.getElementById('taxBenefitsChart').getContext('2d');
+            const taxBenefitsChart = new Chart(taxBenefitsCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Beneficio Fiscal Inmediato',
+                        'Beneficio Fiscal en Jubilación',
+                        'Flexibilidad de Retiro',
+                        'Sin RMDs',
+                        'Opciones de Inversión',
+                        'Potencial de Crecimiento'
+                    ],
+                    datasets: [{
+                        label: 'IRA Tradicional',
+                        data: [90, 20, 40, 0, 95, 85],
+                        backgroundColor: 'rgba(77, 171, 247, 0.2)',
+                        borderColor: 'rgba(77, 171, 247, 1)',
+                        pointBackgroundColor: 'rgba(77, 171, 247, 1)',
+                        pointBorderColor: '#fff'
+                    }, {
+                        label: 'Roth IRA',
+                        data: [10, 95, 85, 100, 95, 85],
+                        backgroundColor: 'rgba(255, 169, 77, 0.2)',
+                        borderColor: 'rgba(255, 169, 77, 1)',
+                        pointBackgroundColor: 'rgba(255, 169, 77, 1)',
+                        pointBorderColor: '#fff'
+                    }, {
+                        label: '401k',
+                        data: [90, 20, 30, 0, 60, 95],
+                        backgroundColor: 'rgba(28, 126, 214, 0.2)',
+                        borderColor: 'rgba(28, 126, 214, 1)',
+                        pointBackgroundColor: 'rgba(28, 126, 214, 1)',
+                        pointBorderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true,
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#ffffff',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                display: false,
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comparación de Beneficios por Instrumento',
+                            color: '#ffffff',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de Comparación de Crecimiento
+            const growthCtx = document.getElementById('growthComparison').getContext('2d');
+            const growthChart = new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 31}, (_, i) => i),
+                    datasets: [{
+                        label: 'IRA Tradicional/401k (Antes de Impuestos)',
+                        data: Array.from({length: 31}, (_, i) => {
+                            return Math.round(6000 * ((Math.pow(1.078, i) - 1) / 0.078));
+                        }),
+                        backgroundColor: 'rgba(77, 171, 247, 0.2)',
+                        borderColor: 'rgba(77, 171, 247, 1)',
+                        borderWidth: 2,
+                        tension: 0.1
+                    }, {
+                        label: 'Roth IRA (Valor Neto)',
+                        data: Array.from({length: 31}, (_, i) => {
+                            return Math.round(6000 * ((Math.pow(1.078, i) - 1) / 0.078));
+                        }),
+                        backgroundColor: 'rgba(255, 169, 77, 0.2)',
+                        borderColor: 'rgba(255, 169, 77, 1)',
+                        borderWidth: 2,
+                        tension: 0.1
+                    }, {
+                        label: 'IRA Tradicional/401k (Después de Impuestos)',
+                        data: Array.from({length: 31}, (_, i) => {
+                            const value = 6000 * ((Math.pow(1.078, i) - 1) / 0.078);
+                            return Math.round(value * 0.8); // Aplicando impuesto del 20%
+                        }),
+                        backgroundColor: 'rgba(28, 126, 214, 0.2)',
+                        borderColor: 'rgba(28, 126, 214, 1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Años',
+                                color: '#ffffff'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valor ($)',
+                                color: '#ffffff'
+                            },
+                            ticks: {
+                                color: '#b0b0b0',
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Crecimiento Proyectado a lo Largo del Tiempo',
+                            color: '#ffffff',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de Valor Neto en Jubilación
+            const netValueCtx = document.getElementById('netValueChart').getContext('2d');
+            const netValueChart = new Chart(netValueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['IRA Tradicional', 'Roth IRA', '401k Tradicional'],
+                    datasets: [{
+                        label: 'Valor Bruto',
+                        data: [694917, 694917, 694917],
+                        backgroundColor: 'rgba(28, 126, 214, 0.7)',
+                        borderColor: 'rgba(28, 126, 214, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Impuestos',
+                        data: [138983, 0, 138983],
+                        backgroundColor: 'rgba(217, 72, 15, 0.7)',
+                        borderColor: 'rgba(217, 72, 15, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Valor Neto Final',
+                        data: [555934, 694917, 555934],
+                        backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                        borderColor: 'rgba(76, 175, 80, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#ffffff',
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Valor Final y Carga Fiscal por Instrumento',
+                            color: '#ffffff',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Funcionalidad de pestañas
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            const tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Funcionalidad de acordeón
+        const acc = document.getElementsByClassName("accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+        
+        // Botón de volver arriba
+        window.onscroll = function() {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                document.getElementById("scrollToTop").classList.add("show");
+            } else {
+                document.getElementById("scrollToTop").classList.remove("show");
+            }
+        };
+        
+        document.getElementById("scrollToTop").addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+        
+        // Enlaces de navegación con desplazamiento suave
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = document.querySelector(this.getAttribute('href'));
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
