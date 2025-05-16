@@ -36,9 +36,9 @@
         }
         
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 1200px; /* Define el ancho máximo para los contenedores */
+            margin: 0 auto; /* Centra el contenedor */
+            padding: 0 20px; /* Añade padding horizontal para el contenido dentro del contenedor */
         }
         
         .header {
@@ -106,12 +106,15 @@
         }
         
         .nav {
-            display: flex;
-            justify-content: center;
+            display: flex; /* Para centrar los elementos 'a' internos */
+            justify-content: center; /* Centra los elementos 'a' horizontalmente */
             background-color: var(--medium-gray);
-            padding: 1rem;
+            padding: 1rem; /* Padding interno de la barra de navegación */
             border-radius: 8px;
-            margin: 2rem 0;
+            /* MODIFICADO: margin: 2rem 0; a margin: 2rem auto; */
+            /* Esto centra la barra de navegación y mantiene los márgenes verticales */
+            /* El max-width lo hereda de la clase .container (1200px) */
+            margin: 2rem auto; 
             position: sticky;
             top: 0;
             z-index: 100;
@@ -119,7 +122,7 @@
         
         .nav a {
             color: var(--text-gray);
-            margin: 0 1rem;
+            margin: 0 1rem; /* Espacio entre los enlaces */
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -154,7 +157,7 @@
         .comparison-table td:first-child {
             position: sticky;
             left: 0;
-            background-color: var(--dark-gray);
+            background-color: var(--dark-gray); /* Asegura que el fondo coincida al hacer scroll */
             z-index: 10;
         }
         
@@ -169,7 +172,7 @@
         .chart-container {
             position: relative;
             height: 400px;
-            width: 100%;
+            width: 100%; /* Asegura que el contenedor del gráfico ocupe el ancho disponible */
             margin: 2rem 0;
         }
         
@@ -204,18 +207,18 @@
         
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* Tres columnas por defecto */
             gap: 1.5rem;
             margin: 2rem 0;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 768px) { /* Para tablets y móviles */
             .comparison-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
             }
             
             .feature-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
             }
         }
         
@@ -262,7 +265,7 @@
         }
 
         .accordion:after {
-            content: '\002B';
+            content: '\002B'; /* Signo más (plus) */
             color: var(--orange-300);
             font-weight: bold;
             float: right;
@@ -270,7 +273,7 @@
         }
 
         .active:after {
-            content: "\2212";
+            content: "\2212"; /* Signo menos (minus) */
         }
 
         .panel {
@@ -291,7 +294,7 @@
         
         .tab {
             overflow: hidden;
-            display: flex;
+            display: flex; /* Para que los botones ocupen el espacio equitativamente */
             margin-bottom: 1rem;
         }
         
@@ -305,8 +308,8 @@
             transition: 0.3s;
             color: var(--text-gray);
             font-weight: 500;
-            flex: 1;
-            border-bottom: 3px solid transparent;
+            flex: 1; /* Los botones de las pestañas comparten el espacio */
+            border-bottom: 3px solid transparent; /* Borde inferior para la pestaña activa */
         }
         
         .tab button:hover {
@@ -320,12 +323,12 @@
         }
         
         .tabcontent {
-            display: none;
+            display: none; /* Oculto por defecto */
             padding: 1.5rem;
             border-top: none;
-            animation: fadeEffect 1s;
+            animation: fadeEffect 1s; /* Animación de aparición */
             background-color: var(--dark-gray);
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 8px 8px; /* Bordes redondeados solo abajo */
         }
         
         @keyframes fadeEffect {
@@ -350,9 +353,9 @@
             padding: 0.5rem;
             position: absolute;
             z-index: 1;
-            bottom: 125%;
+            bottom: 125%; /* Posición encima del elemento */
             left: 50%;
-            margin-left: -100px;
+            margin-left: -100px; /* Centrar el tooltip */
             opacity: 0;
             transition: opacity 0.3s;
             border: 1px solid var(--light-gray);
@@ -376,9 +379,9 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            opacity: 0;
+            opacity: 0; /* Oculto por defecto */
             transition: opacity 0.3s, transform 0.3s;
-            transform: translateY(20px);
+            transform: translateY(20px); /* Efecto de entrada desde abajo */
         }
         
         .scroll-to-top.show {
@@ -579,8 +582,7 @@
         <section id="visual" class="section">
             <h2 class="section-title text-2xl">Comparación Visual de Características Clave</h2>
             
-            <div class="overflow-x-auto">
-                <table class="comparison-table">
+            <div class="overflow-x-auto"> <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Característica</th>
@@ -716,7 +718,7 @@
             
             <div class="card">
                 <p><strong>Fórmula utilizada:</strong> Valor Futuro de una Anualidad</p>
-                <p class="my-2">FV = P × [(1+r)<sup>n</sup> - 1] / r</p>
+                <p class="my-2">FV = P &times; [(1+r)<sup>n</sup> - 1] / r</p>
                 <p>Donde:</p>
                 <ul class="list-disc pl-6 mt-2">
                     <li>P = $6,000 (contribución anual)</li>
@@ -827,7 +829,7 @@
 
     <footer class="bg-gray-900 text-center py-6 mt-12">
         <div class="container">
-            <p class="text-gray-400">© 2023 Instrumentos de Inversión para el Retiro en EE. UU.</p>
+            <p class="text-gray-400">&copy; 2023 Instrumentos de Inversión para el Retiro en EE. UU.</p>
             <p class="text-sm text-gray-500 mt-2">Esta información es de carácter educativo y no constituye asesoramiento financiero o fiscal. Consulte con un profesional financiero calificado antes de tomar decisiones de inversión.</p>
         </div>
     </footer>
@@ -868,8 +870,8 @@
                         pointBorderColor: '#fff'
                     }, {
                         label: '401k',
-                        data: [90, 20, 30, 0, 60, 95],
-                        backgroundColor: 'rgba(28, 126, 214, 0.2)',
+                        data: [90, 20, 30, 0, 60, 95], // Datos representativos para 401k
+                        backgroundColor: 'rgba(28, 126, 214, 0.2)', // Color similar a k401-color
                         borderColor: 'rgba(28, 126, 214, 1)',
                         pointBackgroundColor: 'rgba(28, 126, 214, 1)',
                         pointBorderColor: '#fff'
@@ -894,7 +896,7 @@
                                 }
                             },
                             ticks: {
-                                display: false,
+                                display: false, // Oculta los números en el eje radial
                                 beginAtZero: true,
                                 max: 100
                             }
@@ -924,10 +926,12 @@
             const growthChart = new Chart(growthCtx, {
                 type: 'line',
                 data: {
-                    labels: Array.from({length: 31}, (_, i) => i),
+                    labels: Array.from({length: 31}, (_, i) => i), // Años 0 a 30
                     datasets: [{
                         label: 'IRA Tradicional/401k (Antes de Impuestos)',
                         data: Array.from({length: 31}, (_, i) => {
+                            // FV = P * [((1 + r)^n - 1) / r]
+                            if (i === 0) return 0; // Valor inicial es 0
                             return Math.round(6000 * ((Math.pow(1.078, i) - 1) / 0.078));
                         }),
                         backgroundColor: 'rgba(77, 171, 247, 0.2)',
@@ -937,6 +941,7 @@
                     }, {
                         label: 'Roth IRA (Valor Neto)',
                         data: Array.from({length: 31}, (_, i) => {
+                            if (i === 0) return 0;
                             return Math.round(6000 * ((Math.pow(1.078, i) - 1) / 0.078));
                         }),
                         backgroundColor: 'rgba(255, 169, 77, 0.2)',
@@ -944,15 +949,16 @@
                         borderWidth: 2,
                         tension: 0.1
                     }, {
-                        label: 'IRA Tradicional/401k (Después de Impuestos)',
+                        label: 'IRA Tradicional/401k (Después de Impuestos 20%)',
                         data: Array.from({length: 31}, (_, i) => {
+                            if (i === 0) return 0;
                             const value = 6000 * ((Math.pow(1.078, i) - 1) / 0.078);
                             return Math.round(value * 0.8); // Aplicando impuesto del 20%
                         }),
-                        backgroundColor: 'rgba(28, 126, 214, 0.2)',
+                        backgroundColor: 'rgba(28, 126, 214, 0.2)', // Un color diferente para distinguir
                         borderColor: 'rgba(28, 126, 214, 1)',
                         borderWidth: 2,
-                        borderDash: [5, 5],
+                        borderDash: [5, 5], // Línea discontinua
                         tension: 0.1
                     }]
                 },
@@ -1032,19 +1038,19 @@
                     datasets: [{
                         label: 'Valor Bruto',
                         data: [694917, 694917, 694917],
-                        backgroundColor: 'rgba(28, 126, 214, 0.7)',
+                        backgroundColor: 'rgba(28, 126, 214, 0.7)', // Azul
                         borderColor: 'rgba(28, 126, 214, 1)',
                         borderWidth: 1
                     }, {
-                        label: 'Impuestos',
+                        label: 'Impuestos (20%)',
                         data: [138983, 0, 138983],
-                        backgroundColor: 'rgba(217, 72, 15, 0.7)',
+                        backgroundColor: 'rgba(217, 72, 15, 0.7)', // Naranja oscuro/Rojo
                         borderColor: 'rgba(217, 72, 15, 1)',
                         borderWidth: 1
                     }, {
                         label: 'Valor Neto Final',
                         data: [555934, 694917, 555934],
-                        backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                        backgroundColor: 'rgba(76, 175, 80, 0.7)', // Verde
                         borderColor: 'rgba(76, 175, 80, 1)',
                         borderWidth: 1
                     }]
@@ -1139,15 +1145,16 @@
         }
         
         // Botón de volver arriba
+        const scrollToTopBtn = document.getElementById("scrollToTop");
         window.onscroll = function() {
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                document.getElementById("scrollToTop").classList.add("show");
+                scrollToTopBtn.classList.add("show");
             } else {
-                document.getElementById("scrollToTop").classList.remove("show");
+                scrollToTopBtn.classList.remove("show");
             }
         };
         
-        document.getElementById("scrollToTop").addEventListener("click", function() {
+        scrollToTopBtn.addEventListener("click", function() {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
@@ -1158,12 +1165,15 @@
         document.querySelectorAll('.nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetSection = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
                 
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80, // Ajuste para la altura del nav sticky
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
